@@ -4,19 +4,38 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
-                <div class="card">
-                    <div class="card-header">{{ $checklistTemplate->name }}</div>
+                <div class="my-4">
+                    <a href="{{ route('checklist-template.index') }}">
+                        All Checklist Templates:
+                    </a>
+                    <h1>{{ $checklistTemplate->name }}</h1>
+                </div>
+                <div class="card mb-4">
+                    <div class="card-header">Items</div>
 
-                    <div class="card-body">
-                        Items:
-                        <ul>
+                    <div class="card-body p-0">
+                        <ul class="list-group list-group-flush">
                             @foreach( $checklistTemplate->items as $item)
-                                <li>{{ $item->name }}</li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    <div class="float-left">
+                                        {{ $item->name }}
+                                    </div>
+
+                                    <form action="{{ route('checklist-template.delete', $checklistTemplate) }}" method="POST">
+                                        @csrf
+                                        @method('delete')
+                                        <button class="btn btn-outline-danger" type="submit">Delete</button>
+                                    </form>
+                                </li>
                             @endforeach
                         </ul>
+                    </div>
+                </div>
 
-                        <hr>
-                        <h2>Add Item:</h2>
+                <div class="card mb-4">
+                    <div class="card-header">Add Item</div>
+
+                    <div class="card-body">
                         <form action="{{ route('item-template.store', $checklistTemplate) }}" method="POST">
                             @csrf
                             <div class="form-group">
@@ -27,6 +46,12 @@
                         </form>
                     </div>
                 </div>
+
+                <form action="{{ route('checklist-template.delete', $checklistTemplate) }}" method="POST">
+                    @csrf
+                    @method('delete')
+                    <button class="btn btn-outline-danger" type="submit">Delete Checklist Template</button>
+                </form>
             </div>
         </div>
     </div>

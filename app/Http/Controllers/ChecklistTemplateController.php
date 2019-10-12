@@ -83,11 +83,16 @@ class ChecklistTemplateController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\ChecklistTemplate  $checklistTemplate
+     * @param \App\ChecklistTemplate $checklistTemplate
      * @return \Illuminate\Http\Response
+     * @throws \Exception
      */
     public function destroy(ChecklistTemplate $checklistTemplate)
     {
-        //
+        if (auth()->user()->is($checklistTemplate->owner)) {
+            $checklistTemplate->delete();
+        }
+
+        return redirect(route('checklist-template.index'));
     }
 }
