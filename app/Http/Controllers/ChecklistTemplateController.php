@@ -24,7 +24,7 @@ class ChecklistTemplateController extends Controller
      */
     public function create()
     {
-        //
+        return view('checklist-template.create');
     }
 
     /**
