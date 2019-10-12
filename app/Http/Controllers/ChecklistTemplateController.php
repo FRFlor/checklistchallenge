@@ -14,7 +14,9 @@ class ChecklistTemplateController extends Controller
      */
     public function index()
     {
-        //
+        $checklistTemplates = auth()->user()->checklistTemplates;
+
+        return view('checklist-template.index', compact('checklistTemplates'));
     }
 
     /**
