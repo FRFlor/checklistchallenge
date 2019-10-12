@@ -48,7 +48,11 @@ class ChecklistTemplateController extends Controller
      */
     public function show(ChecklistTemplate $checklistTemplate)
     {
-        //
+        if (! auth()->user()->is($checklistTemplate->owner)) {
+            return redirect(route('home'));
+        }
+
+        return view('checklist-template.show', compact('checklistTemplate'));
     }
 
     /**
