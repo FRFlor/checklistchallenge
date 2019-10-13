@@ -79,11 +79,16 @@ class ItemTemplateController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\ItemTemplate  $itemTemplate
+     * @param \App\ItemTemplate $itemTemplate
      * @return \Illuminate\Http\Response
+     * @throws \Exception
      */
     public function destroy(ItemTemplate $itemTemplate)
     {
-        //
+        if (auth()->user()->is($itemTemplate->checklist->owner)) {
+            $itemTemplate->delete();
+        }
+
+        return redirect(route('checklist-template.show', $itemTemplate->checklist));
     }
 }

@@ -17,11 +17,11 @@
                         <ul class="list-group list-group-flush">
                             @foreach( $checklistTemplate->items as $item)
                                 <li class="list-group-item d-flex justify-content-between align-items-center">
-                                    <div class="float-left">
+                                    <div>
                                         {{ $item->name }}
                                     </div>
 
-                                    <form action="{{ route('checklist-template.delete', $checklistTemplate) }}" method="POST">
+                                    <form action="{{ route('item-template.delete', $item) }}" method="POST">
                                         @csrf
                                         @method('delete')
                                         <button class="btn btn-outline-danger" type="submit">Delete</button>

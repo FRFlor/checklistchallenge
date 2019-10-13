@@ -16,4 +16,5 @@ Route::middleware('auth')->group(function () {
     Route::delete('/checklist-templates/{checklistTemplate}', 'ChecklistTemplateController@destroy')->name('checklist-template.delete');
 
     Route::post('/checklist-templates/{checklistTemplate}', 'ItemTemplateController@store')->name('item-template.store');
+    Route::delete('/item-templates/{itemTemplate}', 'ItemTemplateController@destroy')->name('item-template.delete');
 });
