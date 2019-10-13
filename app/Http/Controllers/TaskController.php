@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UpdateTask;
 use App\Task;
 use Illuminate\Http\Request;
 
@@ -67,9 +68,11 @@ class TaskController extends Controller
      * @param  \App\Task  $task
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Task $task)
+    public function update(UpdateTask $request, Task $task)
     {
-        //
+        $task->update($request->validated());
+
+        return redirect(route('attempt.show', $task->attempt));
     }
 
     /**

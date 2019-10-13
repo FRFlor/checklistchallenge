@@ -1,5 +1,6 @@
 <?php
 
+use App\Attempt;
 use App\Checklist;
 use App\Item;
 use App\User;

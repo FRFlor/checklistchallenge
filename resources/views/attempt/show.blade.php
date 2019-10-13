@@ -16,8 +16,19 @@
                     <div class="card-body p-0">
                         <ul class="list-group list-group-flush">
                             @foreach( $attempt->tasks as $task)
-                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                <li class="list-group-item d-flex justify-content-start align-items-center">
                                     <div>
+                                        <form action="{{ route('task.update', $task) }}" method="POST">
+                                            @csrf
+                                            @method('patch')
+                                            <input type="checkbox"
+                                                   name="completed"
+                                                   value="1"
+                                                   {{ $task->completed ? "checked" : ""}}
+                                                   onChange="this.form.submit()">
+                                        </form>
+                                    </div>
+                                    <div class="ml-2">
                                         {{ $task->name }}
                                     </div>
                                 </li>

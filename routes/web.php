@@ -9,6 +9,8 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::middleware('auth')->group(function () {
+    Route::patch('/tasks/{task}', 'TaskController@update')->name('task.update');
+
     Route::post('/checklists/{checklist}/attempt', 'AttemptController@store')->name('attempt.store');
     Route::get('/attempt/{attempt}', 'AttemptController@show')->name('attempt.show');
 
