@@ -9,6 +9,9 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::middleware('auth')->group(function () {
+    Route::post('/checklists/{checklist}/attempt', 'AttemptController@store')->name('attempt.store');
+    Route::get('/attempt/{attempt}', 'AttemptController@show')->name('attempt.show');
+
     Route::get('/checklists', 'ChecklistController@index')->name('checklist.index');
     Route::get('/checklists/create', 'ChecklistController@create')->name('checklist.create');
     Route::get('/checklists/{checklist}', 'ChecklistController@show')->name('checklist.show');

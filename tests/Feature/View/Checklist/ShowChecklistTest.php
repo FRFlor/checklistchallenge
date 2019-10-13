@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature\View;
+namespace Tests\Feature\View\Checklist;
 
 use App\Checklist;
 use App\User;

@@ -17,4 +17,9 @@ class Checklist extends Model
     {
         return $this->hasMany(Item::class, 'checklist_id');
     }
+
+    public function attempts()
+    {
+        return $this->hasMany(Attempt::class);
+    }
 }

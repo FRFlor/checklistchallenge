@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature\View;
+namespace Tests\Feature\View\Checklist;
 
 use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;

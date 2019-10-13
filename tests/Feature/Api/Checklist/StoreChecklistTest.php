@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature\Api;
+namespace Tests\Feature\Api\Checklist;
 
 use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
