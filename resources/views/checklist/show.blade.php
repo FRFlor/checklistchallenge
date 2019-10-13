@@ -4,11 +4,21 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
-                <div class="my-4">
-                    <a href="{{ route('checklist.index') }}">
-                        All Checklists:
-                    </a>
-                    <h1>{{ $checklist->name }}</h1>
+                <div class="my-4 d-flex justify-content-between align-items-center">
+                    <div>
+                        <a href="{{ route('checklist.index') }}">
+                            All Checklists:
+                        </a>
+                        <h1>{{ $checklist->name }}</h1>
+                    </div>
+                    <div class="float-right">
+                        <form action="{{ route('attempt.store', $checklist) }}" method="POST">
+                            @csrf
+                            <button type="submit" class="btn btn-primary">
+                                Attempt
+                            </button>
+                        </form>
+                    </div>
                 </div>
                 <div class="card mb-4">
                     <div class="card-header">Items</div>

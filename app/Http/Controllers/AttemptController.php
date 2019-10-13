@@ -44,6 +44,8 @@ class AttemptController extends Controller
         $attempt->tasks()->createMany($checklist->items->pluck('name')->map(function ($value) {
             return ['name' => $value];
         }));
+
+        return redirect(route('attempt.show', $attempt));
     }
 
     /**
@@ -54,7 +56,11 @@ class AttemptController extends Controller
      */
     public function show(Attempt $attempt)
     {
-        //
+        if (! auth()->user()->is($attempt->checklist->owner)) {
+            return redirect(route('home'));
+        }
+
+        return view('attempt.show', compact('attempt'));
     }
 
     /**
