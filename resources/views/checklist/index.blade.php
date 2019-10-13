@@ -17,11 +17,12 @@
                             </a>
                         </div>
 
-                        <div class="card-body">
-                            Items:
-                            <ul>
+                        <div class="card-body p-0">
+                            <ul class="list-group list-group-flush">
                                 @foreach( $checklist->items as $item)
-                                    <li>{{ $item->name }}</li>
+                                    <li class="list-group-item d-flex justify-content-start align-items-center">
+                                        {{ $item->name }}
+                                    </li>
                                 @endforeach
                             </ul>
                         </div>

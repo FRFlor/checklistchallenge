@@ -57,6 +57,22 @@
                     </div>
                 </div>
 
+                <div class="card mb-4">
+                    <div class="card-header">Attempts:</div>
+
+                    <div class="card-body p-0">
+                        <ul class="list-group list-group-flush">
+                            @foreach( $checklist->attempts()->orderBy('created_at', 'desc')->get() as $attempt)
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    <a href="{{ route('attempt.show', $attempt) }}">
+                                        {{ $attempt->created_at }}
+                                    </a>
+                                </li>
+                            @endforeach
+                        </ul>
+                    </div>
+                </div>
+
                 <form action="{{ route('checklist.delete', $checklist) }}" method="POST">
                     @csrf
                     @method('delete')

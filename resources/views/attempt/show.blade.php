@@ -8,7 +8,11 @@
                     <a href="{{ route('checklist.index') }}">
                         All Checklists:
                     </a>
-                    <h1>{{ $attempt->name }}</h1>
+                    <h1>
+                        <a href="{{ route('checklist.show', $attempt->checklist) }}">
+                            {{ $attempt->name }}
+                        </a>: {{ $attempt->created_at }}
+                    </h1>
                 </div>
                 <div class="card mb-4">
                     <div class="card-header">Tasks</div>
