@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateItemTemplatesTable extends Migration
+class CreateChecklistsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,10 @@ class CreateItemTemplatesTable extends Migration
      */
     public function up()
     {
-        Schema::create('item_templates', function (Blueprint $table) {
+        Schema::create('checklists', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name');
-            $table->unsignedInteger('checklist_id');
+            $table->unsignedInteger('owner_id');
             $table->timestamps();
         });
     }
@@ -28,6 +28,6 @@ class CreateItemTemplatesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('item_templates');
+        Schema::dropIfExists('checklists');
     }
 }

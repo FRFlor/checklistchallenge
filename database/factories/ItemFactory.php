@@ -2,15 +2,15 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
-use App\ChecklistTemplate;
-use App\ItemTemplate;
+use App\Checklist;
+use App\Item;
 use Faker\Generator as Faker;
 
-$factory->define(ItemTemplate::class, function (Faker $faker) {
+$factory->define(Item::class, function (Faker $faker) {
     return [
         'name' => $faker->sentence,
         'checklist_id' => function () {
-            return factory(ChecklistTemplate::class)->create()->id;
+            return factory(Checklist::class)->create()->id;
         }
     ];
 });

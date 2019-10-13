@@ -2,31 +2,31 @@
 
 namespace Tests\Feature\Api;
 
-use App\ChecklistTemplate;
+use App\Checklist;
 use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
-class StoreItemTemplateTest extends TestCase
+class StoreItemTest extends TestCase
 {
     use RefreshDatabase;
 
     /** @test */
-    public function a_user_can_add_items_to_their_checklist_template()
+    public function a_user_can_add_items_to_their_checklist()
     {
         $this->withoutExceptionHandling();
         $user = factory(User::class)->create();
-        $checklistTemplate = factory(ChecklistTemplate::class)->create([
+        $checklist = factory(Checklist::class)->create([
             'owner_id' => $user->id,
         ]);
 
-        $this->actingAs($user)->post(route('item-template.store', $checklistTemplate), [
+        $this->actingAs($user)->post(route('item.store', $checklist), [
             'name' => 'Item',
         ])->assertSuccessful();
 
-        $this->assertDatabaseHas('item_templates', [
+        $this->assertDatabaseHas('items', [
             'name' => 'Item',
-            'checklist_id' => $checklistTemplate->id,
+            'checklist_id' => $checklist->id,
         ]);
     }
 }

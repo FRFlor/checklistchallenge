@@ -6,7 +6,7 @@ use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
-class CreateChecklistTemplateTest extends TestCase
+class CreateChecklistTest extends TestCase
 {
     use RefreshDatabase;
 
@@ -14,8 +14,8 @@ class CreateChecklistTemplateTest extends TestCase
     public function a_user_can_create_a_checklist()
     {
         $this->actingAs(factory(User::class)->create())
-            ->get(route('checklist-template.create'))
+            ->get(route('checklist.create'))
             ->assertSuccessful()
-            ->assertSeeText('Create Checklist Template');
+            ->assertSeeText('Create Checklist');
     }
 }

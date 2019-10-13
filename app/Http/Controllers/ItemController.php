@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\ChecklistTemplate;
-use App\ItemTemplate;
+use App\Checklist;
+use App\Item;
 use Illuminate\Http\Request;
 
-class ItemTemplateController extends Controller
+class ItemController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -32,23 +32,23 @@ class ItemTemplateController extends Controller
      * Store a newly created resource in storage.
      *
      * @param Request $request
-     * @param ChecklistTemplate $checklistTemplate
+     * @param Checklist $checklist
      * @return void
      */
-    public function store(Request $request, ChecklistTemplate $checklistTemplate)
+    public function store(Request $request, Checklist $checklist)
     {
-        $itemTemplate = $checklistTemplate->items()->create($request->all());
+        $item = $checklist->items()->create($request->all());
 
-        return view('checklist-template.show', compact('checklistTemplate'));
+        return view('checklist.show', compact('checklist'));
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\ItemTemplate  $itemTemplate
+     * @param  \App\Item  $item
      * @return \Illuminate\Http\Response
      */
-    public function show(ItemTemplate $itemTemplate)
+    public function show(Item $item)
     {
         //
     }
@@ -56,10 +56,10 @@ class ItemTemplateController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\ItemTemplate  $itemTemplate
+     * @param  \App\Item  $item
      * @return \Illuminate\Http\Response
      */
-    public function edit(ItemTemplate $itemTemplate)
+    public function edit(Item $item)
     {
         //
     }
@@ -68,10 +68,10 @@ class ItemTemplateController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\ItemTemplate  $itemTemplate
+     * @param  \App\Item  $item
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, ItemTemplate $itemTemplate)
+    public function update(Request $request, Item $item)
     {
         //
     }
@@ -79,16 +79,16 @@ class ItemTemplateController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param \App\ItemTemplate $itemTemplate
+     * @param \App\Item $item
      * @return \Illuminate\Http\Response
      * @throws \Exception
      */
-    public function destroy(ItemTemplate $itemTemplate)
+    public function destroy(Item $item)
     {
-        if (auth()->user()->is($itemTemplate->checklist->owner)) {
-            $itemTemplate->delete();
+        if (auth()->user()->is($item->checklist->owner)) {
+            $item->delete();
         }
 
-        return redirect(route('checklist-template.show', $itemTemplate->checklist));
+        return redirect(route('checklist.show', $item->checklist));
     }
 }

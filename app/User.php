@@ -37,8 +37,8 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function checklistTemplates()
+    public function checklists()
     {
-        return $this->hasMany(ChecklistTemplate::class, 'owner_id');
+        return $this->hasMany(Checklist::class, 'owner_id');
     }
 }

@@ -5,22 +5,22 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="my-4">
-                    <h1 class="float-left">Checklist Templates</h1>
-                    <a class="btn btn-primary float-right" href="{{ route('checklist-template.create') }}">Create</a>
+                    <h1 class="float-left">Checklists</h1>
+                    <a class="btn btn-primary float-right" href="{{ route('checklist.create') }}">Create</a>
                     <div class="clearfix"></div>
                 </div>
-                @foreach($checklistTemplates as $checklistTemplate)
+                @foreach($checklists as $checklist)
                     <div class="card mb-4">
                         <div class="card-header">
-                            <a href="{{ route('checklist-template.show', $checklistTemplate) }}">
-                                {{ $checklistTemplate->name }}
+                            <a href="{{ route('checklist.show', $checklist) }}">
+                                {{ $checklist->name }}
                             </a>
                         </div>
 
                         <div class="card-body">
                             Items:
                             <ul>
-                                @foreach( $checklistTemplate->items as $item)
+                                @foreach( $checklist->items as $item)
                                     <li>{{ $item->name }}</li>
                                 @endforeach
                             </ul>

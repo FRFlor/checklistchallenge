@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\ChecklistTemplate;
+use App\Checklist;
 use Illuminate\Http\Request;
 
-class ChecklistTemplateController extends Controller
+class ChecklistController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,9 +14,9 @@ class ChecklistTemplateController extends Controller
      */
     public function index()
     {
-        $checklistTemplates = auth()->user()->checklistTemplates;
+        $checklists = auth()->user()->checklists;
 
-        return view('checklist-template.index', compact('checklistTemplates'));
+        return view('checklist.index', compact('checklists'));
     }
 
     /**
@@ -26,7 +26,7 @@ class ChecklistTemplateController extends Controller
      */
     public function create()
     {
-        return view('checklist-template.create');
+        return view('checklist.create');
     }
 
     /**
@@ -37,33 +37,33 @@ class ChecklistTemplateController extends Controller
      */
     public function store(Request $request)
     {
-        $template = auth()->user()->checklistTemplates()->create($request->all());
+        $checklist = auth()->user()->checklists()->create($request->all());
 
-        return redirect(route('checklist-template.show', $template));
+        return redirect(route('checklist.show', $checklist));
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\ChecklistTemplate  $checklistTemplate
+     * @param  \App\Checklist  $checklist
      * @return \Illuminate\Http\Response
      */
-    public function show(ChecklistTemplate $checklistTemplate)
+    public function show(Checklist $checklist)
     {
-        if (! auth()->user()->is($checklistTemplate->owner)) {
+        if (! auth()->user()->is($checklist->owner)) {
             return redirect(route('home'));
         }
 
-        return view('checklist-template.show', compact('checklistTemplate'));
+        return view('checklist.show', compact('checklist'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\ChecklistTemplate  $checklistTemplate
+     * @param  \App\Checklist  $checklist
      * @return \Illuminate\Http\Response
      */
-    public function edit(ChecklistTemplate $checklistTemplate)
+    public function edit(Checklist $checklist)
     {
         //
     }
@@ -72,10 +72,10 @@ class ChecklistTemplateController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\ChecklistTemplate  $checklistTemplate
+     * @param  \App\Checklist  $checklist
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, ChecklistTemplate $checklistTemplate)
+    public function update(Request $request, Checklist $checklist)
     {
         //
     }
@@ -83,16 +83,16 @@ class ChecklistTemplateController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param \App\ChecklistTemplate $checklistTemplate
+     * @param \App\Checklist $checklist
      * @return \Illuminate\Http\Response
      * @throws \Exception
      */
-    public function destroy(ChecklistTemplate $checklistTemplate)
+    public function destroy(Checklist $checklist)
     {
-        if (auth()->user()->is($checklistTemplate->owner)) {
-            $checklistTemplate->delete();
+        if (auth()->user()->is($checklist->owner)) {
+            $checklist->delete();
         }
 
-        return redirect(route('checklist-template.index'));
+        return redirect(route('checklist.index'));
     }
 }

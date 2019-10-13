@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class ChecklistTemplate extends Model
+class Checklist extends Model
 {
     protected $fillable = ['name'];
 
@@ -15,6 +15,6 @@ class ChecklistTemplate extends Model
 
     public function items()
     {
-        return $this->hasMany(ItemTemplate::class, 'checklist_id');
+        return $this->hasMany(Item::class, 'checklist_id');
     }
 }

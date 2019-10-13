@@ -4,12 +4,12 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class ItemTemplate extends Model
+class Item extends Model
 {
     protected $fillable = ['name'];
 
     public function checklist()
     {
-        return $this->belongsTo(ChecklistTemplate::class);
+        return $this->belongsTo(Checklist::class);
     }
 }
