@@ -10,8 +10,11 @@
                     <div class="card-body">
                         <form action="{{ route('checklist.store') }}" method="POST">
                             @csrf
-                            <input type="text" name="name" placeholder="name:">
-                            <button type="submit">Submit</button>
+                            <div class="form-group">
+                                <label for="name">Name:</label>
+                                <input type="text" class="form-control" name="name" id="name" placeholder="name:">
+                            </div>
+                            <button type="submit" class="btn btn-primary">Submit</button>
                         </form>
                     </div>
                 </div>
