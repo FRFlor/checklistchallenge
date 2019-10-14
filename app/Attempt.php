@@ -21,6 +21,6 @@ class Attempt extends Model
 
     public function getCreatedAtAttribute($value)
     {
-        return Carbon::make($value)->diffForHumans();
+        return Carbon::make($value)->format("M d, Y");
     }
 }
