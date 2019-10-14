@@ -17,6 +17,7 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/checklists', 'ChecklistController@index')->name('checklist.index');
     Route::get('/checklists/create', 'ChecklistController@create')->name('checklist.create');
+    Route::get('/checklists/{checklist}/edit', 'ChecklistController@edit')->name('checklist.edit');
     Route::get('/checklists/{checklist}', 'ChecklistController@show')->name('checklist.show');
     Route::post('/checklists', 'ChecklistController@store')->name('checklist.store');
     Route::delete('/checklists/{checklist}', 'ChecklistController@destroy')->name('checklist.delete');

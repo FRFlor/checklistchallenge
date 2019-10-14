@@ -65,7 +65,10 @@ class ChecklistController extends Controller
      */
     public function edit(Checklist $checklist)
     {
-        //
+        if (! auth()->user()->is($checklist->owner)) {
+            return redirect(route('checklist.index'));
+        }
+        return view('checklist.edit', compact('checklist'));
     }
 
     /**

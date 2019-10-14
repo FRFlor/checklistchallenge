@@ -30,30 +30,9 @@
                                     <div>
                                         {{ $item->name }}
                                     </div>
-
-                                    <form action="{{ route('item.delete', $item) }}" method="POST">
-                                        @csrf
-                                        @method('delete')
-                                        <button class="btn btn-outline-danger" type="submit">Delete</button>
-                                    </form>
                                 </li>
                             @endforeach
                         </ul>
-                    </div>
-                </div>
-
-                <div class="card mb-4">
-                    <div class="card-header">Add Item</div>
-
-                    <div class="card-body">
-                        <form action="{{ route('item.store', $checklist) }}" method="POST">
-                            @csrf
-                            <div class="form-group">
-                                <label for="name">Name:</label>
-                                <input type="text" class="form-control" name="name" id="name" placeholder="name:">
-                            </div>
-                            <button type="submit" class="btn btn-primary">Submit</button>
-                        </form>
                     </div>
                 </div>
 
@@ -72,12 +51,9 @@
                         </ul>
                     </div>
                 </div>
-
-                <form action="{{ route('checklist.delete', $checklist) }}" method="POST">
-                    @csrf
-                    @method('delete')
-                    <button class="btn btn-outline-danger" type="submit">Delete Checklist</button>
-                </form>
+                <div>
+                    <a class="btn btn-outline-secondary" href="{{ route('checklist.edit', $checklist) }}">Edit</a>
+                </div>
             </div>
         </div>
     </div>
