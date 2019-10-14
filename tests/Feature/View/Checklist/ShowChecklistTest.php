@@ -38,6 +38,6 @@ class ShowChecklistTest extends TestCase
 
         $this->actingAs(factory(User::class)->create())
             ->get(route('checklist.show', $checklist))
-            ->assertRedirect(route('home'));
+            ->assertRedirect(route('checklist.index'));
     }
 }

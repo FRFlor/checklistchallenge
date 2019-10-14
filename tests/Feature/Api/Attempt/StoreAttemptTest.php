@@ -29,7 +29,7 @@ class StoreAttemptTest extends TestCase
 
         $this->actingAs($user)
             ->post(route('attempt.store', $checklist))
-            ->assertSuccessful();
+            ->assertRedirect();
 
         $this->assertDatabaseHas('attempts', [
             'name' => $checklist->name,
