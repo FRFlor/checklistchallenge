@@ -37,6 +37,10 @@ class AttemptController extends Controller
      */
     public function store(Request $request, Checklist $checklist)
     {
+        if ($attempt = $checklist->attempts()->where('created_at', '>=', today())->first()) {
+            return redirect(route('attempt.show', $attempt));
+        }
+
         $attempt = $checklist->attempts()->create([
             'name' => $checklist->name,
         ]);
