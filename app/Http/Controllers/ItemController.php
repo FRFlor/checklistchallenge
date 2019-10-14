@@ -9,26 +9,6 @@ use Illuminate\Http\Request;
 class ItemController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param Request $request
@@ -37,9 +17,13 @@ class ItemController extends Controller
      */
     public function store(Request $request, Checklist $checklist)
     {
-        $item = $checklist->items()->create($request->all());
+        if (! auth()->user()->is($checklist->owner)) {
+            return redirect(route('checklist.index'));
+        }
 
-        return view('checklist.show', compact('checklist'));
+        $checklist->items()->create($request->all());
+
+        return redirect(route('checklist.edit', $checklist));
     }
 
     /**
@@ -49,29 +33,6 @@ class ItemController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show(Item $item)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Item  $item
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Item $item)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Item  $item
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Item $item)
     {
         //
     }
@@ -89,6 +50,6 @@ class ItemController extends Controller
             $item->delete();
         }
 
-        return redirect(route('checklist.show', $item->checklist));
+        return redirect(route('checklist.edit', $item->checklist));
     }
 }

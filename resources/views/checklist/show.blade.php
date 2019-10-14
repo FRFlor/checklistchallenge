@@ -46,6 +46,9 @@
                                     <a href="{{ route('attempt.show', $attempt) }}">
                                         {{ $attempt->created_at }}
                                     </a>
+                                    <div>
+                                        {{ $attempt->completed ? "Completed" : "Incomplete" }}
+                                    </div>
                                 </li>
                             @endforeach
                         </ul>

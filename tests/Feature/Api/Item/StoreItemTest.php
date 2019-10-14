@@ -14,15 +14,27 @@ class StoreItemTest extends TestCase
     /** @test */
     public function a_user_can_add_items_to_their_checklist()
     {
-        $this->withoutExceptionHandling();
         $user = factory(User::class)->create();
         $checklist = factory(Checklist::class)->create([
             'owner_id' => $user->id,
         ]);
 
+        $this->post(route('item.store', $checklist), [
+            'name' => 'Item',
+        ])->assertRedirect();
+
+        $this->actingAs(factory(User::class)->create())->post(route('item.store', $checklist), [
+            'name' => 'Item',
+        ])->assertRedirect(route('checklist.index'));
+
+        $this->assertDatabaseMissing('items', [
+            'name' => 'Item',
+            'checklist_id' => $checklist->id,
+        ]);
+
         $this->actingAs($user)->post(route('item.store', $checklist), [
             'name' => 'Item',
-        ])->assertSuccessful();
+        ])->assertRedirect(route('checklist.edit', $checklist));
 
         $this->assertDatabaseHas('items', [
             'name' => 'Item',

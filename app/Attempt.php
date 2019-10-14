@@ -9,6 +9,13 @@ class Attempt extends Model
 {
     protected $fillable = ['name'];
 
+    public function getCompletedAttribute()
+    {
+        return $this->tasks->reject(function ($task) {
+            return $task->completed;
+        })->isEmpty();
+    }
+
     public function checklist()
     {
         return $this->belongsTo(Checklist::class);
