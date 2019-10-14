@@ -57,7 +57,7 @@ class AttemptController extends Controller
     public function show(Attempt $attempt)
     {
         if (! auth()->user()->is($attempt->checklist->owner)) {
-            return redirect(route('home'));
+            return redirect(route('checklist.index'));
         }
 
         return view('attempt.show', compact('attempt'));

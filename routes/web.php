@@ -1,12 +1,13 @@
 <?php
 
 Route::get('/', function () {
+    if (auth()->check()) {
+        return redirect(route('checklist.index'));
+    }
     return view('welcome');
 });
 
 Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
 
 Route::middleware('auth')->group(function () {
     Route::patch('/tasks/{task}', 'TaskController@update')->name('task.update');

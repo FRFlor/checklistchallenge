@@ -51,7 +51,7 @@ class ChecklistController extends Controller
     public function show(Checklist $checklist)
     {
         if (! auth()->user()->is($checklist->owner)) {
-            return redirect(route('home'));
+            return redirect(route('checklists'));
         }
 
         return view('checklist.show', compact('checklist'));
