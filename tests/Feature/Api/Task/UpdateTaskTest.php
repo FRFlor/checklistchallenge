@@ -4,7 +4,6 @@ namespace Tests\Feature\Api\Task;
 
 use App\Task;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 class UpdateTaskTest extends TestCase
@@ -14,17 +13,30 @@ class UpdateTaskTest extends TestCase
     /** @test */
     public function a_user_can_update_their_task()
     {
-        $this->withoutExceptionHandling();
+        $tasks = factory(Task::class, 2)->create();
 
-        $task = factory(Task::class)->create();
+        $task = $tasks->first();
 
         $this->assertFalse($task->fresh()->completed);
 
         $this->actingAs($task->attempt->checklist->owner)
             ->patch(route('task.update', $task), [
                 'completed' => true,
-            ]);
+            ])
+            ->assertRedirect(route('attempt.show', $task->attempt));
 
         $this->assertTrue($task->fresh()->completed);
+    }
+
+    /** @test */
+    public function it_returns_to_the_checklist_if_the_attempt_is_completed()
+    {
+        $task = factory(Task::class)->create();
+
+        $this->actingAs($task->attempt->checklist->owner)
+            ->patch(route('task.update', $task), [
+                'completed' => true,
+            ])
+            ->assertRedirect(route('checklist.show', $task->attempt->checklist));
     }
 }

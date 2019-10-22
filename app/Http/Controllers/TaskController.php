@@ -72,7 +72,12 @@ class TaskController extends Controller
     {
         $task->update($request->validated());
 
-        return redirect(route('attempt.show', $task->attempt));
+        $attempt = $task->attempt;
+        if ($attempt->completed) {
+            return redirect(route('checklist.show', $attempt->checklist));
+        }
+
+        return redirect(route('attempt.show', $attempt));
     }
 
     /**
