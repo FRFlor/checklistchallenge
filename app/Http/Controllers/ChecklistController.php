@@ -54,7 +54,12 @@ class ChecklistController extends Controller
             return redirect(route('checklist.index'));
         }
 
-        return view('checklist.show', compact('checklist'));
+        $attempts = $checklist->attempts->reject(function ($attempt) {
+           return $attempt->completed;
+        });
+
+
+        return view('checklist.show', compact('checklist', 'attempts'));
     }
 
     /**
