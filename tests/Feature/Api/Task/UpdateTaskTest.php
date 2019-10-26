@@ -22,8 +22,7 @@ class UpdateTaskTest extends TestCase
         $this->actingAs($task->attempt->checklist->owner)
             ->patch(route('task.update', $task), [
                 'completed' => true,
-            ])
-            ->assertRedirect(route('attempt.show', $task->attempt));
+            ]);
 
         $this->assertTrue($task->fresh()->completed);
     }
